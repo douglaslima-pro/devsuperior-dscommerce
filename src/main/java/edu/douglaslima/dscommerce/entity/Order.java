@@ -1,6 +1,9 @@
 package edu.douglaslima.dscommerce.entity;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -28,6 +32,8 @@ public class Order {
 	private User client;
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private Payment payment;
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> orderItems = new HashSet<>();
 	
 	public Order() {}
 
@@ -77,6 +83,16 @@ public class Order {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	public Set<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+	
+	public List<Product> getProducts() {
+		return orderItems.stream()
+				.map(OrderItem::getProduct)
+				.toList();
 	}
 	
 }
