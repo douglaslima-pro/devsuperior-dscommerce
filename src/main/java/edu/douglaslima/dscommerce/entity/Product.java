@@ -2,6 +2,7 @@ package edu.douglaslima.dscommerce.entity;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -47,6 +48,26 @@ public class Product {
 		this.imgUrl = imgUrl;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Product)) {
+			return false;
+		}
+		Product other = (Product) obj;
+		return Objects.equals(id, other.id);
+	}
+	
 	public Long getId() {
 		return id;
 	}
