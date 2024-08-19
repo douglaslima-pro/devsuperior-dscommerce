@@ -12,4 +12,11 @@ public record ProductDTO(Long id, String name, String description, Double price,
 		return new Product(id, name, description, price, imgUrl);
 	}
 	
+	public void copyToEntity(Product product) {
+		product.setName(name);
+		product.setDescription(description);
+		product.setPrice(price);
+		product.setImgUrl(imgUrl);
+	}
+	
 }
