@@ -8,4 +8,8 @@ public record ProductDTO(Long id, String name, String description, Double price,
 		this(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getImgUrl());
 	}
 	
+	public Product toEntity() {
+		return new Product(id, name, description, price, imgUrl);
+	}
+	
 }

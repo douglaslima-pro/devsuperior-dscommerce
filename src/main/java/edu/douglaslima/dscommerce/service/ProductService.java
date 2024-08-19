@@ -28,4 +28,11 @@ public class ProductService {
 		return result.map(product -> new ProductDTO(product));
 	}
 	
+	@Transactional
+	public ProductDTO insert(ProductDTO productDTO) {
+		Product product = productDTO.toEntity();
+		product = productRepository.save(product);
+		return new ProductDTO(product);
+	}
+
 }
