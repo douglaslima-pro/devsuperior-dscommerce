@@ -52,4 +52,10 @@ public class ProductController {
 		return ResponseEntity.ok(productDTO);
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
 }
